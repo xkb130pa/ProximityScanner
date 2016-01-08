@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Proximity Scanner</title>
+    <link rel="stylesheet" href="css/jquery.mobile-1.1.0-rc.2.min.css" />
+    <link rel="styleSheet" href="css/index.css" />
+    <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
+    <script src="js/jquery-1.7.1.min.js"></script>
+    <script src="js/jquery.mobile-1.1.0-rc.2.min.js"></script>
+    <script src="js/geolocation.js"></script>
+    <style>
+        body {
+         background-color: black;
+         color:white;
+		 margin:0px;
+        }
+		#Version {
+		 position:absolute;
+		 width:100%;
+		 top:0;
+		 right:0;
+		 color:gray;
+		 font-size: small;
+		 text-align:center;
+		 padding: 2px;
+		}
+        #Header {
+		 width:100%;
+		 position:absolute;
+		 top:0;
+		 left:0;
+		 height:40px;
+         padding:6px;
+         font-size:medium;
+         text-align:center;
+         background-color: black;
+         color:white;
+		 vertical-align:middle;
+        }
+		#Content {
+		 padding-top:40px;   /* Height of the header element */
+		 padding-bottom:40px;   /* Height of the footer element */
+		}
+		#Disclaimer {
+		 position:absolute;
+		 top:60px;
+		 padding-top:6px;
+		 width:100%;
+		 height:60px;
+		 text-align:center;
+		 vertical-align:middle;		 
+		 display:none;
+		 color:red;
+		 font-weight:bold;
+		}
+        #ResponseTime {
+		 width:100%;
+		 height:16px;
+		 position:absolute;
+		 bottom:40px;
+		 left:0;
+		 padding:2px;
+         text-align:center;
+         background-color: gray;
+         color:white;
+		 vertical-align:top;
+		 font-size:small;
+		 border-bottom: 16px solid black;
+		}		
+        #Status {
+		 width:100%;
+		 height:40px;
+		 position:absolute;
+		 padding-top:6px;
+		 bottom:0;
+		 left:0;
+         font-size:medium;
+         text-align:center;
+         background-color: black;
+         color:white;
+		 vertical-align:bottom;
+		}
+   
+        #Directions {
+         margin-top:12px;
+         margin-bottom:12px;
+		 padding-top:6px;
+         padding-left:6px;
+         padding-right:6px;
+		 text-align:center;
+		}
+        span {
+		 font-weight:normal;
+		}
+        #Code {
+         background-color:lightblue;
+         display:inline-block;
+        }
+
+        #Coordinates {
+		 position:relative;
+		 padding-bottom:20px;
+		 text-align:center;
+		 line-height:140%;
+		 width:100%
+		 padding-top:6px;
+		 font-weight:bold;
+		 text-align:center;
+		 visibility:hidden;
+        }
+                
+		#ResponseBlock {
+		 width=100%;
+		 visibility:hidden;
+		 margin-top:5%;
+		 margin-bottom:5%;
+		}
+		
+		#Response {
+		 width:100%;
+         margin:0;
+		 color:white;
+		 background-color:gray;
+		 border-top:1px solid black;
+		 border-bottom:1px solid black;
+		 text-align:center;
+         font-size:medium;
+		 font-weight:normal;
+		 padding:6px;
+		 }
+
+		 #ResponseDescription {
+		 text-align:center;
+         font-size:medium;
+		 font-weight:normal;
+		 padding:6px;
+		 }
+
+		/*
+		#Center {
+		 width:100%;
+		  position: fixed;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		}
+		*/
+		 
+		#Button .ui-btn-inner .ui-btn-text {
+			display: block !important;
+			height: 50px !important;
+			width: 240px !important;
+			font-weight:bold;
+		}
+		
+		.Z0 
+		{
+		  background-image: url(./img/ProximityRange00.png) !important;
+		  background-repeat: no-repeat  !important;
+		  background-position: center  !important; 
+		  background-size: 40px 30px;		  
+		}
+		.Z1 
+		{
+		  background-image: url(./img/ProximityRange01.png) !important;
+		  background-repeat: no-repeat  !important;
+		  background-position: center  !important; 
+		  background-size: 40px 30px;		  
+		}
+		.Z2 
+		{
+		  background-image: url(./img/ProximityRange02.png) !important;
+		  background-repeat: no-repeat  !important;
+		  background-position: center  !important; 
+		  background-size: 40px 30px;		  
+		}
+		.Z3 
+		{
+		  background-image: url(./img/ProximityRange03.png) !important;
+		  background-repeat: no-repeat  !important;
+		  background-position: center  !important; 
+		  background-size: 40px 30px;		  
+		}
+		.Z4 
+		{
+		  background-image: url(./img/ProximityRange04.png) !important;
+		  background-repeat: no-repeat  !important;
+		  background-position: center  !important; 
+		  background-size: 40px 30px;		  
+		}
+		.Z5 
+		{
+		  background-image: url(./img/ProximityRange05.png) !important;
+		  background-repeat: no-repeat  !important;
+		  background-position: center  !important; 
+		  background-size: 40px 30px;		  
+		}
+
+		
+</style>
+  </head>
+  <body>
+    <div id="Header">
+      <h3>Proximity Scanner</h3>
+    </div>
+	<div id="Version">Ver 0.20</div>
+    <div id="Content">
+		<div id="Security">
+		<p id="Directions">Please enter your security code.  Then press the button.</p>
+		<div style="width:100%; text-align:center;">
+			<span style="font-weight:bold;">Security Code&nbsp;&nbsp;</span><input id="Code" Value="" style="width:6em;"/>
+		  </div>
+		</div> 
+		<div id="Disclaimer">
+		Disclaimer
+		</div>
+		
+		<div id="Center" style="text-align:center;">
+			<div id="ResponseBlock">
+				<div id="Response"></div>
+		    <div id="ResponseDescription"></div>
+		</div> 
+
+			<a id="Button" class=".ui-btn-inner .ui-btn-text Z0" data-role="button" data-inline="true" onclick="ScanCallback();" ></a>
+		</div>
+		
+
+
+		<div id="Coordinates">Your Location:<br/>
+		 Latitude:<span id="Latitude">...</span>,&nbsp;
+		 Longitude:<span id="Longitude">...</span>,&nbsp;
+		 Accuracy:<span id="Accuracy">...</span>
+	    </div>
+
+	</div>
+	
+    <div id="ResponseTime"></div>
+
+    <div id="Status">Status bar</div>
+  </body>
+</html>
